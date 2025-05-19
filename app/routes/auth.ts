@@ -8,12 +8,21 @@ import bcrypt from "bcryptjs";
 const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type"
-  };
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Credentials": "true"
+};
 
 export const action = async ({
     request,
 }: ActionFunctionArgs) => {
+    // Handle OPTIONS preflight request
+    if (request.method === "OPTIONS") {
+        return new Response(null, {
+            headers: corsHeaders,
+            status: 204
+        });
+    }
+
     if (request.method !== "POST") {
         return json({ message: "Method not allowed" }, {status:405,headers: corsHeaders});
     }
