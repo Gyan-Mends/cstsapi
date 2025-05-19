@@ -1,4 +1,5 @@
-/** @type {import('@remix-run/dev').AppConfig} */
-module.exports = {
-  ignoredRouteFiles: ["**/*.css"],
+const config = {
+  ignoredRouteFiles: ['**/*.css'],
 };
+
+module.exports = config;
