@@ -69,7 +69,7 @@ export const action: ActionFunction = async ({ request }) => {
 
 }
 
-// export const loader: LoaderFunction = async ({ request }) => {
-//     return json({ message: "OK" }, { headers: corsHeaders })
-// }
+export const loader: LoaderFunction = async ({ request }) => {
+    return json({ message: "OK" }, { headers: corsHeaders })
+}
 
