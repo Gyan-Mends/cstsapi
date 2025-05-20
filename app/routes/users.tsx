@@ -62,7 +62,7 @@ export const action: ActionFunction = async ({ request }) => {
             phone,
             position,
             password: hashedPassword,
-            image: base64Image
+             base64Image
         });
 
         console.log(userResponse);
