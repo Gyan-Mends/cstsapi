@@ -23,11 +23,8 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    base64Image: {
-        type: String, // Stores the base64-encoded string of the image
-    },
     image: {
-        type: Buffer, // Optionally stores the raw file data as a buffer
+        type: String, // Optionally stores the raw file data as a buffer
     },
 }, {
     timestamps: true, // Adds createdAt and updatedAt fields
