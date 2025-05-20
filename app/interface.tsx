@@ -10,3 +10,13 @@ export interface LoginInterface {
     email: string,
     password: string,
 }
+
+export interface UsersInterface {
+    fullName: string;
+    email: string;
+    phone: string;
+    position: string;
+    password: string;
+    base64Image?: string;
+    image?: File;
+}
