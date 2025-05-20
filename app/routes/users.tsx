@@ -15,7 +15,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 export const action: ActionFunction = async ({ request }) => {
     try {
         const data = await request.json();
-        const { fullName, email, phone, position, password, image } = data;
+        const { fullName, email, phone, position, password, base64Image } = data;
 
         // Validate required fields
         if (!fullName || !email || !phone || !position || !password) {
@@ -62,7 +62,7 @@ export const action: ActionFunction = async ({ request }) => {
             phone,
             position,
             password: hashedPassword,
-            image: image || ''
+            image: base64Image || ''
         });
 
         await user.save();
