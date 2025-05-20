@@ -1,6 +1,6 @@
 import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
-import bcrypt from "bcryptjs";
 import User from "~/model/users";
+// Assuming `user` model file is located in `model` directory
 
 const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
@@ -28,65 +28,29 @@ export const action: ActionFunction = async ({ request }) => {
             });
         }
 
-        // Validate email format
-        const emailRegex = /^[^\s@]+@[^s@]+.[^s@]+$/;
-        if (!emailRegex.test(email)) {
-            return json({
-                success: false,
-                error: "Invalid email format"
-            }, {
-                status: 400,
-                headers: corsHeaders
-            });
-        }
-
-        // Hash password
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Check if user with this email already exists
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return json({
-                success: false,
-                error: "User with this email already exists"
-            }, {
-                status: 400,
-                headers: corsHeaders
-            });
-        }
-
         // Save user to the database
-        const user = new User({
+        const userResponse = new User({
             fullName,
             email,
             phone,
             position,
-            password: hashedPassword,
-            image: base64Image || ''
+            password,
+            image: base64Image
         });
 
-        await user.save();
+        await userResponse.save();
 
         return json({
             success: true,
-            message: "User saved successfully",
-            data: {
-                id: user._id,
-                fullName: user.fullName,
-                email: user.email,
-                phone: user.phone,
-                position: user.position,
-                image: user.image
-            }
+            message: "User saved successfully"
         }, {
             status: 200,
             headers: corsHeaders
         });
     } catch (error) {
-        console.error('Error saving user:', error);
         return json({
             success: false,
-            error: error instanceof Error ? error.message : 'Unable to process data'
+            error: "Unable to process data"
         }, {
             status: 500,
             headers: corsHeaders
