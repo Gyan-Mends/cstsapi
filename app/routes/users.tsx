@@ -65,6 +65,8 @@ export const action: ActionFunction = async ({ request }) => {
             image: base64Image
         });
 
+        console.log(userResponse);
+
         await userResponse.save();
 
         return json({
