@@ -35,7 +35,7 @@ export const action: ActionFunction = async ({ request }) => {
             phone,
             position,
             password,
-            base64Image
+            image: base64Image
         });
 
         await userResponse.save();
